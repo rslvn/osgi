@@ -6,12 +6,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>osgi-felix-scr</artifactId>
+		<artifactId>osgi-native</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>osgi-felix-scr-core</artifactId>
-	<name>osgi-felix-scr-core</name>
+	<artifactId>osgi-native-core</artifactId>
+	<name>osgi-native-core</name>
 	<packaging>bundle</packaging>
 
 	<url>http://maven.apache.org</url>
@@ -47,7 +47,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                            com.example.osgi.felix.scr.core,
+                            com.example.osgi.core,
                             com.example.osgi.api
                         </Export-Package>
                     </instructions>

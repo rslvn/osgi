@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>osgi</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+    <artifactId>osgi-felix-scr</artifactId>
+    <name>osgi-felix-scr</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <bnd.version.policy>[$(version;==;$(@)),$(version;+;$(@)))</bnd.version.policy>
+    </properties>
+
+    <modules>
+        <module>core</module>
+        <module>cli</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <target>1.8</target>
+                    <source>1.8</source>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.5.1</version>
+                <inherited>true</inherited>
+                <extensions>true</extensions>
+                <configuration>
+                    <obrRepository>NONE</obrRepository>
+                    <instructions>
+                        <nsh_interface>org.apache.aries.blueprint.NamespaceHandler</nsh_interface>
+                        <nsh_namespace>osgi.service.blueprint.namespace</nsh_namespace>
+                        <_removeheaders>Private-Package,Include-Resource,Embed-Dependency,Created-By,Bnd-LastModified,Built-By,Tool</_removeheaders>
+                        <_versionpolicy>${bnd.version.policy}</_versionpolicy>
+                        <Bundle-DocURL>http://karaf.apache.org/</Bundle-DocURL>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>cleanVersions</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>cleanVersions</goal>
+                        </goals>
+                        <configuration>
+                            <versions>
+                                <karaf.osgi.version>${project.version}</karaf.osgi.version>
+                            </versions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>osgi-felix-scr</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>osgi-felix-scr-cli</artifactId>
+	<name>osgi-felix-scr-cli</name>
+	<packaging>bundle</packaging>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>osgi-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.core -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.karaf.shell/org.apache.karaf.shell.core -->
+		<dependency>
+			<groupId>org.apache.karaf.shell</groupId>
+			<artifactId>org.apache.karaf.shell.core</artifactId>
+			<version>4.2.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-services-maven-plugin</artifactId>
+                <version>4.2.0</version>
+            </plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Karaf-Commands>com.example.osgi.cli</Karaf-Commands>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Export-Package>
+                            com.example.osgi.cli,
+                            com.example.osgi.api
+                        </Export-Package>
+                        <Import-Package>
+                            org.apache.karaf.shell.api.action,
+                            org.apache.karaf.shell.api.action.lifecycle,
+                            org.slf4j,
+                            com.example.osgi.api
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

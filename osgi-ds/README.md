@@ -1,4 +1,30 @@
 ```
+resulav@resula-pc:/tools/apache-karaf-4.2.0$ bin/karaf clean
+karaf: Ignoring predefined value for KARAF_HOME
+        __ __                  ____      
+       / //_/____ __________ _/ __/      
+      / ,<  / __ `/ ___/ __ `/ /_        
+     / /| |/ /_/ / /  / /_/ / __/        
+    /_/ |_|\__,_/_/   \__,_/_/         
+
+  Apache Karaf (4.2.0)
+
+Hit '<tab>' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
+
+karaf@root()> feature:repo-add cxf-dosgi 2.3.0                                                                                                                                                                                        
+Adding feature url mvn:org.apache.cxf.dosgi/cxf-dosgi/2.3.0/xml/features
+karaf@root()>                                                                                                                                                                                                                         
+karaf@root()> feature:repo-add mvn:com.example/osgi-ds-feature/1.0-SNAPSHOT/xml/features                                                                                                                                              
+Adding feature url mvn:com.example/osgi-ds-feature/1.0-SNAPSHOT/xml/features
+karaf@root()>                                                                                                                                                                                                                         
+karaf@root()> feature:install cxf-dosgi-provider-rs aries-rsa-discovery-zookeeper-server cxf-features-logging cxf-rs-description-swagger2 osgi-ds-feature                                                                             
+karaf@root()> 
+```
+
+
+```
 resulav@resula-pc:~$ karaf clean
 karaf: Ignoring predefined value for KARAF_HOME
         __ __                  ____      
@@ -50,3 +76,6 @@ karaf@root()> scr:list
     [   1] [active      ] 
 karaf@root()>          
 ```
+
+
+

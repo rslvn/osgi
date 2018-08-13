@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -17,7 +16,9 @@
         <module>api</module>
         <module>core</module>
         <module>cli</module>
-    </modules>
+        <module>rest</module>
+        <module>features</module>
+  </modules>
 
     <build>
         <plugins>
@@ -27,10 +28,10 @@
                 <version>${version.maven.bundle.plugin}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <obrRepository>NONE</obrRepository>
-                    <instructions>
-                        <_include>-bnd.bnd</_include>
-                    </instructions>
+                    <supportedProjectTypes>
+                        <supportedProjectType>bundle</supportedProjectType>
+                        <supportedProjectType>jar</supportedProjectType>
+                    </supportedProjectTypes>
                 </configuration>
             </plugin>
         </plugins>

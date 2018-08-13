@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>osgi-ds</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>osgi-ds-core</artifactId>
+	<name>osgi-ds-core</name>
+	<packaging>bundle</packaging>
+
+	<url>http://maven.apache.org</url>
+	<dependencies>
+
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>osgi-ds-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.core -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${version.osgi.core}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.compendium -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>${version.osgi.compendium}</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+		</plugins>
+	</build>
+</project>

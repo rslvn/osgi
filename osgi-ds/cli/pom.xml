@@ -6,12 +6,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>osgi-felix-scr</artifactId>
+		<artifactId>osgi-ds</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>osgi-felix-scr-cli</artifactId>
-	<name>osgi-felix-scr-cli</name>
+	<artifactId>osgi-ds-cli</artifactId>
+	<name>osgi-ds-cli</name>
 	<packaging>bundle</packaging>
 
 
@@ -19,7 +19,7 @@
 
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>osgi-felix-scr-api</artifactId>
+			<artifactId>osgi-ds-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -48,7 +48,7 @@
             <plugin>
                 <groupId>org.apache.karaf.tooling</groupId>
                 <artifactId>karaf-services-maven-plugin</artifactId>
-				<version>${version.karaf.services.maven.plugin}</version>
+                <version>${version.karaf.services.maven.plugin}</version>
             </plugin>
 
 			<plugin>
@@ -57,20 +57,20 @@
                 <configuration>
                     <instructions>
                         <Karaf-Commands>
-                            com.example.osgi.felix.scr.cli,
-                            com.example.osgi.felix.scr.cli.arg
-                        </Karaf-Commands>
+							com.example.osgi.ds.cli,
+							com.example.osgi.ds.cli.arg
+						</Karaf-Commands>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Export-Package>
-                            com.example.osgi.felix.scr.cli,
-                            com.example.osgi.felix.scr.api
+                            com.example.osgi.ds.cli,
+                            com.example.osgi.ds.api
                         </Export-Package>
                         <Import-Package>
                             org.apache.karaf.shell.api.action,
                             org.apache.karaf.shell.api.action.lifecycle,
                             org.slf4j,
-                            com.example.osgi.felix.scr.api
+                            com.example.osgi.ds.api
                         </Import-Package>
                     </instructions>
                 </configuration>

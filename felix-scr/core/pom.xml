@@ -19,7 +19,7 @@
 
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>osgi-api</artifactId>
+			<artifactId>osgi-felix-scr-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
-            <version>6.0.0</version>
+            <version>${version.osgi.core}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.annotations</artifactId>
-            <version>1.12.0</version>
+            <version>${version.felix.scr.annotations}</version>
         </dependency>
 
     </dependencies>
@@ -48,15 +48,18 @@
                     <instructions>
                         <Export-Package>
                             com.example.osgi.felix.scr.core,
-                            com.example.osgi.api
+                            com.example.osgi.felix.scr.api
                         </Export-Package>
+                        <Import-Package>
+                            *
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
-                <version>1.26.0</version>
+                <version>${version.maven.scr.plugin}</version>
                 <executions>
                     <execution>
                         <id>generate-scr-srcdescriptor</id>

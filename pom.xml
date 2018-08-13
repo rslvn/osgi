@@ -7,25 +7,60 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>osgi</name>
-    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <version.karaf.shell.core>4.2.0</version.karaf.shell.core>
+        <version.osgi.core>6.0.0</version.osgi.core>
+        <version.osgi.compendium>5.0.0</version.osgi.compendium>
+        <version.felix.scr.annotations>1.12.0</version.felix.scr.annotations>
+        <version.slf4j>1.7.25</version.slf4j>
+        <version.junit>3.8.1</version.junit>
+
+        <version.maven.compiler.plugin>2.5.1</version.maven.compiler.plugin>
+        <version.maven.bundle.plugin>3.5.1</version.maven.bundle.plugin>
+        <version.karaf.services.maven.plugin>4.2.0</version.karaf.services.maven.plugin>
+        <version.maven.scr.plugin>1.26.0</version.maven.scr.plugin>
+    </properties>
+
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
+            <version>${version.slf4j}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>${version.junit}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
     <modules>
-        <module>api</module>
         <module>felix-scr</module>
+        <module>osgi-ds</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.maven.compiler.plugin}</version>
+                <configuration>
+                    <target>${maven.compiler.target}</target>
+                    <source>${maven.compiler.source}</source>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
 
 <!--     <build>
         <plugins>

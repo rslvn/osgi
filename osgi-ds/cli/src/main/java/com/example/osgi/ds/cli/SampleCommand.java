@@ -1,15 +1,15 @@
-package com.example.osgi.felix.scr.cli;
+package com.example.osgi.ds.cli;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-import com.example.osgi.felix.scr.cli.util.CommandUtility;
+import com.example.osgi.ds.cli.util.CommandUtility;
 import org.apache.karaf.shell.api.action.Action;
 import org.apache.karaf.shell.api.action.Command;
 import org.apache.karaf.shell.api.action.lifecycle.Reference;
 import org.apache.karaf.shell.api.action.lifecycle.Service;
 import org.slf4j.Logger;
 
-import com.example.osgi.felix.scr.api.SampleService;
+import com.example.osgi.ds.api.SampleService;
 
 /**
  * Created by resulav on 11.08.2018.

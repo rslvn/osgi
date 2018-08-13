@@ -38,6 +38,13 @@
     <description>osgi-ds-rest OSGi bundle project.</description>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>osgi-ds-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.compendium -->
         <dependency>
             <groupId>org.osgi</groupId>
@@ -88,11 +95,9 @@
                     <instructions>
                         <!--<_wab>src/main/webapp/</_wab> -->
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Activator>com.example.osgi.ds.rest.Activator</Bundle-Activator>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Export-Package>com.example.osgi.ds.rest*;version=${project.version}</Export-Package>
                         <Import-Package>*</Import-Package>
-                        <Web-ContextPath>api</Web-ContextPath>
                     </instructions>
                     <unpackBundle>true</unpackBundle>
                 </configuration>

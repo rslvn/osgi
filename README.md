@@ -1,6 +1,10 @@
 # osgi
 
+##osgi
 
+## karaf
+- [karaf website](https://karaf.apache.org)
+- [official documenttaion](https://karaf.apache.org/documentation.html)
 ```
 ```
 

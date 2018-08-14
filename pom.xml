@@ -25,6 +25,10 @@
         <version.maven.bundle.plugin>3.5.1</version.maven.bundle.plugin>
         <version.karaf.services.maven.plugin>4.2.0</version.karaf.services.maven.plugin>
         <version.maven.scr.plugin>1.26.0</version.maven.scr.plugin>
+
+        <cxf.version>[3,4)</cxf.version>
+        <jackson.version>2.9.4</jackson.version>
+        <scr.version>[4.2.0,4.3.0)</scr.version>
     </properties>
 
 

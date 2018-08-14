@@ -12,15 +12,12 @@
     <name>osgi-felix-scr</name>
     <packaging>pom</packaging>
 
-    <properties>
-        <bnd.version.policy>[$(version;==;$(@)),$(version;+;$(@)))</bnd.version.policy>
-    </properties>
-
     <modules>
         <module>api</module>
         <module>core</module>
         <module>cli</module>
-    <module>rest</module>
+        <module>rest</module>
+        <module>features</module>
   </modules>
 
     <build>
@@ -45,7 +42,6 @@
                         <nsh_interface>org.apache.aries.blueprint.NamespaceHandler</nsh_interface>
                         <nsh_namespace>osgi.service.blueprint.namespace</nsh_namespace>
                         <_removeheaders>Private-Package,Include-Resource,Embed-Dependency,Created-By,Bnd-LastModified,Built-By,Tool</_removeheaders>
-                        <_versionpolicy>${bnd.version.policy}</_versionpolicy>
                         <Bundle-DocURL>http://karaf.apache.org/</Bundle-DocURL>
                     </instructions>
                 </configuration>

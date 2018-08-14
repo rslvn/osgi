@@ -16,7 +16,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+<features name="${project.parent.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
     <repository>mvn:org.apache.cxf.dosgi/cxf-dosgi/2.3.0/xml/features</repository>
     <repository>mvn:com.example/osgi-ds-feature/${project.version}/xml/features</repository>
 

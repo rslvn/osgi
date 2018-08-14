@@ -26,6 +26,7 @@
         <feature>aries-rsa-discovery-zookeeper-server</feature>
         <feature>cxf-features-logging</feature>
         <feature>cxf-rs-description-swagger2</feature>
+        <feature>scr</feature>
 
         <bundle>mvn:org.webjars/swagger-ui/2.2.10-1</bundle>
 

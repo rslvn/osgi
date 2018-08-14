@@ -19,8 +19,13 @@ karaf@root()>
 karaf@root()> feature:repo-add mvn:com.example/osgi-ds-feature/1.0-SNAPSHOT/xml/features                                                                                                                                              
 Adding feature url mvn:com.example/osgi-ds-feature/1.0-SNAPSHOT/xml/features
 karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> feature:install cxf-dosgi-provider-rs aries-rsa-discovery-zookeeper-server cxf-features-logging cxf-rs-description-swagger2 osgi-ds-feature                                                                             
-karaf@root()> 
+karaf@root()> feature:install cxf-dosgi-provider-rs cxf-features-logging cxf-rs-description-swagger2 scr osgi-ds-feature                                                                             
+karaf@root()>
+karaf@root()> rsa:endpoints                                                                                                                                                                                                           
+Endpoints for framework b4203783-ce68-4e31-b60f-cdd8161ffd8b
+id                               | interfaces                                 | framework                            | comp name                               
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+http://localhost:8181/cxf/sample | [com.example.osgi.ds.rest.SampleResources] | b4203783-ce68-4e31-b60f-cdd8161ffd8b | com.example.osgi.ds.rest.SampleResources
 ```
 
 

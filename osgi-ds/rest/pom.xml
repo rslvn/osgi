@@ -29,11 +29,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>osgi-ds-rest</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-
     <name>osgi-ds-rest Bundle</name>
     <description>osgi-ds-rest OSGi bundle project.</description>
 
@@ -45,21 +42,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.compendium -->
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-            <version>${version.osgi.compendium}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.jaxrs -->
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.service.jaxrs</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -67,12 +49,14 @@
             <version>2.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.osgi/osgi.cmpn -->
         <dependency>
             <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>${version.osgi.core}</version>
+            <artifactId>osgi.cmpn</artifactId>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -96,7 +80,10 @@
                         <!--<_wab>src/main/webapp/</_wab> -->
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>com.example.osgi.ds.rest*;version=${project.version}</Export-Package>
+                        <Export-Package>
+                            com.example.osgi.ds.rest.*;version=${project.version},
+                            com.example.osgi.ds.api.*;version=${project.version}
+                        </Export-Package>
                         <Import-Package>*</Import-Package>
                     </instructions>
                     <unpackBundle>true</unpackBundle>

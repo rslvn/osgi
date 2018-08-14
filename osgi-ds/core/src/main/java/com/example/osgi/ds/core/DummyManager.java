@@ -1,26 +1,19 @@
-package com.example.osgi.ds.rest;
+package com.example.osgi.ds.core;
 
-/**
- * Created by resulav on 13.08.2018.
- */
-
+import com.example.osgi.ds.api.DummyService;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 import org.slf4j.Logger;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Application;
-
 import static org.slf4j.LoggerFactory.getLogger;
 
-
-@Component(service=TestResources.class, property={"service.exported.interfaces=*",
-        "service.exported.configs=org.apache.cxf.rs",
-        "org.apache.cxf.rs.address=/test"})
-public class TestResources extends Application {
+/**
+ * Created by resulav on 14.08.2018.
+ */
+@Component(enabled = true, immediate = true)
+public class DummyManager implements DummyService{
 
     private final Logger logger = getLogger(getClass());
 
@@ -39,10 +32,8 @@ public class TestResources extends Application {
         logger.info("{} modifed", getClass().getTypeName());
     }
 
-
-    @GET
-    @Path("hello")
-    public String sayHello() {
-        return "Hello from JAXRS";
+    @Override
+    public String getName() {
+        return getClass().getTypeName();
     }
 }

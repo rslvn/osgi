@@ -16,10 +16,12 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<features name="osgi-felix-scr-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.4.0">
+<features name="osgi-felix-scr-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.4.0">
 
     <repository>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</repository>
-    
+
     <feature name="osgi-felix-scr-base" version="${project.version}">
         <feature dependency="true" version="${scr.version}">scr</feature>
         <bundle>mvn:com.example/osgi-felix-scr-api/${project.version}</bundle>
@@ -29,14 +31,16 @@
     <feature name="osgi-felix-scr-rest" version="${project.version}">
         <feature version="${project.version}">osgi-felix-scr-base</feature>
         <feature dependency="true">http</feature>
-        <requirement>osgi.service;effective:=active;filter:=(objectClass=org.osgi.service.http.HttpService)</requirement>
+        <requirement>osgi.service;effective:=active;filter:=(objectClass=org.osgi.service.http.HttpService)
+        </requirement>
         <feature dependency="true">aries-blueprint</feature>
         <feature version="${cxf.version}" dependency="true">cxf</feature>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${jackson.version}</bundle>
-        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}
+        </bundle>
         <bundle>mvn:com.example/osgi-felix-scr-rest/${project.version}</bundle>
     </feature>
 

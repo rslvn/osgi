@@ -27,23 +27,19 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>osgi-ds-feature</artifactId>
+    <artifactId>osgi-ds-features</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>osgi-ds-feature</name>
+    <name>osgi-ds-features</name>
     <description>osgi-ds-feature details</description>
 
     <build>
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
+                <directory>src/main/feature</directory>
                 <filtering>true</filtering>
-                <includes>
-                    <include>**/features.xml</include>
-                    <include>**/*.cfg</include>
-                    <include>**/*.properties</include>
-                </includes>
+                <targetPath>${project.build.directory}/feature</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -52,18 +48,16 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>filter</id>
-                        <phase>generate-resources</phase>
                         <goals>
                             <goal>resources</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.12</version>
                 <executions>
                     <execution>
                         <id>attach-artifacts</id>
@@ -74,9 +68,8 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>target/classes/features.xml</file>
+                                    <file>target/feature/feature.xml</file>
                                     <type>xml</type>
-                                    <classifier>features</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>

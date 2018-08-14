@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<features name="osgi-ds-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.4.0">
+
+    <repository>mvn:org.apache.cxf.dosgi/cxf-dosgi/${osgi.ds.version}/xml/features</repository>
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.2.0/xml/features</repository>
+
+    <feature name="osgi-ds-base" version="${project.version}">
+        <details>${project.description}</details>
+        <feature dependency="true">scr</feature>
+        <bundle>mvn:com.example/osgi-ds-api/${project.version}</bundle>
+        <bundle>mvn:com.example/osgi-ds-core/${project.version}</bundle>
+    </feature>
+
+    <feature name="osgi-ds-dosgi" version="${project.version}">
+        <details>${project.description}</details>
+        <feature dependency="true">http</feature>
+        <feature dependency="true">cxf</feature>
+        <feature dependency="true">cxf-dosgi-provider-rs</feature>
+        <feature dependency="true">aries-rsa-discovery-zookeeper-server</feature>
+        <feature dependency="true">cxf-features-logging</feature>
+        <feature dependency="true">cxf-rs-description-swagger2</feature>
+        <bundle>mvn:org.webjars/swagger-ui/2.2.10-1</bundle>
+    </feature>
+
+    <feature name="osgi-ds-rest" version="${project.version}">
+        <details>${project.description}</details>
+        <feature version="${project.version}">osgi-ds-base</feature>
+        <feature version="${project.version}">osgi-ds-dosgi</feature>
+
+        <bundle>mvn:com.example/osgi-ds-rest/${project.version}</bundle>
+    </feature>
+
+    <feature name="osgi-ds-cli" version="${project.version}">
+        <details>${project.description}</details>
+        <feature version="${project.version}">osgi-ds-base</feature>
+        <bundle>mvn:com.example/osgi-ds-cli/${project.version}</bundle>
+    </feature>
+
+    <feature name="osgi-ds-all" version="${project.version}">
+        <details>${project.description}</details>
+        <feature version="${project.version}">osgi-ds-rest</feature>
+        <feature version="${project.version}">osgi-ds-cli</feature>
+    </feature>
+
+
+    <!--
+        <feature name='${project.artifactId}' description='${project.name}' version='${project.version}'>
+            <details>${project.description}</details>
+            <feature>cxf-dosgi-provider-rs</feature>
+            <feature>aries-rsa-discovery-zookeeper-server</feature>
+            <feature>cxf-features-logging</feature>
+            <feature>cxf-rs-description-swagger2</feature>
+            <feature>scr</feature>
+
+            <bundle>mvn:org.webjars/swagger-ui/2.2.10-1</bundle>
+
+            <bundle>mvn:com.example/osgi-ds-api/${project.version}</bundle>
+            <bundle>mvn:com.example/osgi-ds-core/${project.version}</bundle>
+            <bundle>mvn:com.example/osgi-ds-cli/${project.version}</bundle>
+            <bundle>mvn:com.example/osgi-ds-rest/${project.version}</bundle>
+
+
+            <bundle>mvn:org.apache.cxf/cxf-rt-transports-http/3.2.6</bundle>
+
+        </feature>
+    -->
+</features>

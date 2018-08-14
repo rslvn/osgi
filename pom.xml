@@ -29,6 +29,7 @@
         <cxf.version>[3,4)</cxf.version>
         <jackson.version>2.9.4</jackson.version>
         <scr.version>[4.2.0,4.3.0)</scr.version>
+        <osgi.ds.version>2.3.0</osgi.ds.version>
     </properties>
 
 

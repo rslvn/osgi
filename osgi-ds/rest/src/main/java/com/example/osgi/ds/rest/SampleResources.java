@@ -20,45 +20,45 @@ import com.example.osgi.ds.api.SampleService;
 import com.example.osgi.ds.api.model.SampleConfig;
 
 @Component(immediate = true, enabled = true, service = SampleResources.class, property = {
-		"service.exported.interfaces=*", "service.exported.configs=org.apache.cxf.rs",
-		"org.apache.cxf.rs.address=/sample" })
+        "service.exported.interfaces=*", "service.exported.configs=org.apache.cxf.rs",
+        "org.apache.cxf.rs.address=/sample", "org.apache.cxf.rs.provider=com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"})
 public class SampleResources {
 
-	private final Logger logger = getLogger(getClass());
+    private final Logger logger = getLogger(getClass());
 
-	@Reference
-	private SampleService sampleService;
+    @Reference
+    private SampleService sampleService;
 
-	@Activate
-	void activate() {
-		logger.info("{} activated", getClass().getTypeName());
-	}
+    @Activate
+    void activate() {
+        logger.info("{} activated", getClass().getTypeName());
+    }
 
-	@Deactivate
-	void deactivate() {
-		logger.info("{} deactivated", getClass().getTypeName());
-	}
+    @Deactivate
+    void deactivate() {
+        logger.info("{} deactivated", getClass().getTypeName());
+    }
 
-	@Modified
-	void modified() {
-		logger.info("{} modifed", getClass().getTypeName());
-	}
+    @Modified
+    void modified() {
+        logger.info("{} modifed", getClass().getTypeName());
+    }
 
-	@GET
-	@Path("hello")
-	public String sayHello() {
-		return "Hello " + getClass().getTypeName();
-	}
+    @GET
+    @Path("hello")
+    public String sayHello() {
+        return "Hello " + getClass().getTypeName();
+    }
 
-	@GET
-	@Path("name")
-	public String sayName() {
-		return sampleService.getName();
-	}
+    @GET
+    @Path("name")
+    public String sayName() {
+        return sampleService.getName();
+    }
 
-	@GET
-	@Path("config")
-	public SampleConfig getConfig() {
-		return sampleService.getConfig();
-	}
+    @GET
+    @Path("config")
+    public SampleConfig getConfig() {
+        return sampleService.getConfig();
+    }
 }

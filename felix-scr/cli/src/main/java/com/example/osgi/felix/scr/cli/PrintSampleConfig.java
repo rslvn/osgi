@@ -1,24 +1,26 @@
+/**
+ * 
+ */
 package com.example.osgi.felix.scr.cli;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
-import com.example.osgi.felix.scr.cli.util.CommandUtility;
 import org.apache.karaf.shell.api.action.Action;
 import org.apache.karaf.shell.api.action.Command;
 import org.apache.karaf.shell.api.action.lifecycle.Reference;
 import org.apache.karaf.shell.api.action.lifecycle.Service;
-import org.slf4j.Logger;
 
 import com.example.osgi.felix.scr.api.SampleService;
+import com.example.osgi.felix.scr.cli.util.CommandUtility;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Created by resulav on 11.08.2018.
+ * @author resulav
+ *
  */
-@Command(scope = CommandUtility.SCOPE, name = SampleCommand.COMMAND, description = "Returns sample service name")
+@Slf4j
+@Command(scope = CommandUtility.SCOPE, name = SampleCommand.COMMAND, description = "Returns sample service config")
 @Service
-public class SampleCommand implements Action {
-
-	private final Logger logger = getLogger(getClass());
+public class PrintSampleConfig implements Action {
 
 	static final String COMMAND = "print-sample-config";
 
@@ -28,10 +30,11 @@ public class SampleCommand implements Action {
 	@Override
 	public Object execute() throws Exception {
 		try {
-			CommandUtility.calledCommand(logger, COMMAND);
-			return service.getName();
+			CommandUtility.calledCommand(log, COMMAND);
+			System.out.println(service.getConfig().toString());
 		} finally {
-			CommandUtility.finishedCommand(logger, COMMAND);
+			CommandUtility.finishedCommand(log, COMMAND);
 		}
+		return null;
 	}
 }

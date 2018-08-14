@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 
 import com.example.osgi.felix.scr.api.SampleService;
+import com.example.osgi.felix.scr.api.model.SampleConfig;
 import com.example.osgi.felix.scr.rest.util.RestUtility;
 
 /**
@@ -47,5 +48,12 @@ public class SampleResources {
 	public String sayName() {
 		logger.info(LOG_FORMAT, "sayHello");
 		return RestUtility.getService(SampleService.class).getName();
+	}
+
+	@GET
+	@Path("config")
+	public SampleConfig getConfig() {
+		logger.info(LOG_FORMAT, "getConfig");
+		return RestUtility.getService(SampleService.class).getConfig();
 	}
 }

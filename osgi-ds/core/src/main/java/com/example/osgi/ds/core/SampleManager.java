@@ -3,8 +3,6 @@
  */
 package com.example.osgi.ds.core;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 import java.util.Arrays;
 
 import org.osgi.service.component.annotations.Activate;
@@ -19,53 +17,65 @@ import org.osgi.service.metatype.annotations.AttributeType;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import org.osgi.service.metatype.annotations.Option;
-import org.slf4j.Logger;
 
 import com.example.osgi.ds.api.DummyService;
 import com.example.osgi.ds.api.SampleService;
+import com.example.osgi.ds.api.model.SampleConfig;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author resulav
  *
  */
+@Slf4j
 @Component(enabled = true, immediate = true)
 @Designate(ocd = SampleManager.Config.class)
 public class SampleManager implements SampleService {
 
-	private final Logger logger = getLogger(getClass());
+	private static final String LOGGER_CALLED = "{} called";
 
 	@Reference(policy = ReferencePolicy.STATIC, cardinality = ReferenceCardinality.MANDATORY)
 	private DummyService dummyService;
 
+	private Config config;
+
 	@Activate
 	void activate(Config config) {
 		print(config);
-		logger.info("{} activated", getClass().getTypeName());
+		log.info("DummyService.getName: {}", dummyService.getName());
+		log.info("{} activated", getClass().getTypeName());
 	}
 
 	@Deactivate
 	void deactivate(Config config) {
 		print(config);
-		logger.info("{} deactivated", getClass().getTypeName());
+		log.info("{} deactivated", getClass().getTypeName());
 	}
 
 	@Modified
 	void modified(Config config) {
 		print(config);
-		logger.info("{} modifed", getClass().getTypeName());
+		log.info("{} modifed", getClass().getTypeName());
 	}
 
 	private void print(Config config) {
-		final String loggerFormat = "{}: {}";
-		logger.info(loggerFormat, "foo_bar", config.foo_bar());
-		logger.info(loggerFormat, "max_size", config.max_size());
-		logger.info(loggerFormat, "servicename_propertyname_boolean", config.servicename_propertyname_boolean());
-		logger.info(loggerFormat, "servicename_propertyname_dropdown", config.servicename_propertyname_dropdown());
-		logger.info(loggerFormat, "servicename_propertyname_password", config.servicename_propertyname_password());
-		logger.info(loggerFormat, "servicename_propertyname_long", config.servicename_propertyname_long());
-		logger.info(loggerFormat, "servicename_propertyname_string", config.servicename_propertyname_string());
-		logger.info(loggerFormat, "servicename_propertyname_string_array", Arrays.toString(config.servicename_propertyname_string_array()));
-		logger.info(loggerFormat, "items", Arrays.toString(config.items()));
+		this.config = config;
+		StringBuilder sb = new StringBuilder();
+		sb.append("foo_bar: ").append(config.foo_bar()).append("\n\t");
+		sb.append("max_size: ").append(config.max_size()).append("\n\t");
+		sb.append("servicename_propertyname_boolean: ").append(config.servicename_propertyname_boolean())
+				.append("\n\t");
+		sb.append("servicename_propertyname_dropdown: ").append(config.servicename_propertyname_dropdown())
+				.append("\n\t");
+		sb.append("servicename_propertyname_password: ").append(config.servicename_propertyname_password())
+				.append("\n\t");
+		sb.append("servicename_propertyname_long: ").append(config.servicename_propertyname_long()).append("\n\t");
+		sb.append("servicename_propertyname_string: ").append(config.servicename_propertyname_string()).append("\n\t");
+		sb.append("servicename_propertyname_string_array: ")
+				.append(Arrays.toString(config.servicename_propertyname_string_array())).append("\n\t");
+		sb.append("items: ").append(Arrays.toString(config.items())).append("\n\t");
+		log.info(sb.toString());
 	}
 
 	@Override
@@ -88,6 +98,13 @@ public class SampleManager implements SampleService {
 		}
 
 		return sb.toString();
+	}
+
+	@Override
+	public SampleConfig getConfig() {
+		log.info(LOGGER_CALLED, "getConfig");
+		return SampleConfig.builder().name(config.foo_bar()).maxSize(config.max_size())
+				.number(config.servicename_propertyname_long()).build();
 	}
 
 	@ObjectClassDefinition(name = "Annotation Demo Service - OSGi")
@@ -115,7 +132,7 @@ public class SampleManager implements SampleService {
 				@Option(label = "DAYS", value = "DAYS"), @Option(label = "HOURS", value = "HOURS"),
 				@Option(label = "MILLISECONDS", value = "MILLISECONDS"), @Option(label = "MINUTES", value = "MINUTES"),
 				@Option(label = "SECONDS", value = "SECONDS") })
-		String servicename_propertyname_dropdown() default "";
+		String servicename_propertyname_dropdown() default "SECONDS";
 
 		@AttributeDefinition(name = "String Array Property", description = "Sample String array property", type = AttributeType.STRING)
 		String[] servicename_propertyname_string_array() default { "foo", "bar" };

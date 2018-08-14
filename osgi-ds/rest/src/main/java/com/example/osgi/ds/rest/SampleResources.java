@@ -17,18 +17,19 @@ import org.slf4j.Logger;
  */
 
 import com.example.osgi.ds.api.SampleService;
+import com.example.osgi.ds.api.model.SampleConfig;
 
-@Component(immediate = true,enabled = true,service = SampleResources.class, property = { "service.exported.interfaces=*",
-		"service.exported.configs=org.apache.cxf.rs", "org.apache.cxf.rs.address=/sample" })
-
+@Component(immediate = true, enabled = true, service = SampleResources.class, property = {
+		"service.exported.interfaces=*", "service.exported.configs=org.apache.cxf.rs",
+		"org.apache.cxf.rs.address=/sample" })
 public class SampleResources {
 
 	private final Logger logger = getLogger(getClass());
 
-    @Reference
+	@Reference
 	private SampleService sampleService;
 
-    @Activate
+	@Activate
 	void activate() {
 		logger.info("{} activated", getClass().getTypeName());
 	}
@@ -49,9 +50,15 @@ public class SampleResources {
 		return "Hello " + getClass().getTypeName();
 	}
 
-    @GET
-    @Path("name")
-    public String sayName() {
-        return sampleService.getName();
-    }
+	@GET
+	@Path("name")
+	public String sayName() {
+		return sampleService.getName();
+	}
+
+	@GET
+	@Path("config")
+	public SampleConfig getConfig() {
+		return sampleService.getConfig();
+	}
 }

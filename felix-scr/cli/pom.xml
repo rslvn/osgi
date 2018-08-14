@@ -40,40 +40,43 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.2</version>
+		</dependency>
+
 
 	</dependencies>
 
 	<build>
 		<plugins>
-            <plugin>
-                <groupId>org.apache.karaf.tooling</groupId>
-                <artifactId>karaf-services-maven-plugin</artifactId>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>karaf-services-maven-plugin</artifactId>
 				<version>${version.karaf.services.maven.plugin}</version>
-            </plugin>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Karaf-Commands>
-                            com.example.osgi.felix.scr.cli,
-                            com.example.osgi.felix.scr.cli.arg
-                        </Karaf-Commands>
-                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>
-                            com.example.osgi.felix.scr.cli,
-                            com.example.osgi.felix.scr.api
-                        </Export-Package>
-                        <Import-Package>
-                            org.apache.karaf.shell.api.action,
-                            org.apache.karaf.shell.api.action.lifecycle,
-                            org.slf4j,
-                            com.example.osgi.felix.scr.api
-                        </Import-Package>
-                    </instructions>
-                </configuration>
+				<configuration>
+					<instructions>
+						<Karaf-Commands>
+							com.example.osgi.felix.scr.cli,
+							com.example.osgi.felix.scr.cli.arg
+						</Karaf-Commands>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Export-Package>
+							com.example.osgi.felix.scr.cli,
+							com.example.osgi.felix.scr.api
+						</Export-Package>
+						<Import-Package>
+							*
+						</Import-Package>
+					</instructions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

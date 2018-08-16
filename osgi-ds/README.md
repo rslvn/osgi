@@ -1,86 +1,145 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [ds](#ds)
+  - [deployment to karaf](#deployment-to-karaf)
+    - [bundle deployment](#bundle-deployment)
+      - [dependent feature deployment](#dependent-feature-deployment)
+      - [ds-api](#ds-api)
+      - [ds-core](#ds-core)
+      - [ds-cli](#ds-cli)
+    - [feature deployment](#feature-deployment)
+      - [add feature.xml](#add-featurexml)
+      - [osgi-ds-base](#osgi-ds-base)
+      - [osgi-ds-cli](#osgi-ds-cli)
+      - [osgi-ds-rest](#osgi-ds-rest)
+      - [osgi-ds-all](#osgi-ds-all)
+    - [REST test](#rest-test)
+      - [/ds/sample/hello](#dssamplehello)
+      - [/ds/sample/name](#dssamplename)
+      - [/ds/sample/config](#dssampleconfig)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# osgi-ds
+
+## deployment to karaf
+
+### bundle deployment
+
+#### dependent feature deployment
 ```
-resulav@resula-pc:/tools/apache-karaf-4.2.0$ bin/karaf clean
-karaf: Ignoring predefined value for KARAF_HOME
-        __ __                  ____      
-       / //_/____ __________ _/ __/      
-      / ,<  / __ `/ ___/ __ `/ /_        
-     / /| |/ /_/ / /  / /_/ / __/        
-    /_/ |_|\__,_/_/   \__,_/_/         
+feature:install scr
+```
+#### ds-api
+```
+bundle:install -s mvn:com.example/osgi-ds-api/1.0-SNAPSHOT
 
-  Apache Karaf (4.2.0)
-
-Hit '<tab>' for a list of available commands
-and '[cmd] --help' for help on a specific command.
-Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
-
-karaf@root()> feature:repo-add cxf-dosgi 2.3.0                                                                                                                                                                                        
-Adding feature url mvn:org.apache.cxf.dosgi/cxf-dosgi/2.3.0/xml/features
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> feature:repo-add mvn:com.example/osgi-ds-feature/1.0-SNAPSHOT/xml/features                                                                                                                                              
-Adding feature url mvn:com.example/osgi-ds-feature/1.0-SNAPSHOT/xml/features
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> feature:install cxf-dosgi-provider-rs cxf-features-logging cxf-rs-description-swagger2 scr osgi-ds-feature                                                                             
-karaf@root()>
-karaf@root()> rsa:endpoints                                                                                                                                                                                                           
-Endpoints for framework b4203783-ce68-4e31-b60f-cdd8161ffd8b
-id                               | interfaces                                 | framework                            | comp name                               
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-http://localhost:8181/cxf/sample | [com.example.osgi.ds.rest.SampleResources] | b4203783-ce68-4e31-b60f-cdd8161ffd8b | com.example.osgi.ds.rest.SampleResources
+list
+bundle:list
 ```
 
+#### ds-core
+```
+bundle:install -s mvn:com.example/osgi-ds-core/1.0-SNAPSHOT
+
+list
+bundle:list
+```
+
+#### ds-cli
+```
+bundle:install -s mvn:com.example/osgi-ds-cli/1.0-SNAPSHOT
+
+list
+bundle:list
+
+osgi-ds:echo -p engineer resul
+osgi-ds:echo -p engineer resul avan
+osgi-ds:echo -p engineer -a 35 resul avan
 
 ```
-resulav@resula-pc:~$ karaf clean
-karaf: Ignoring predefined value for KARAF_HOME
-        __ __                  ____      
-       / //_/____ __________ _/ __/      
-      / ,<  / __ `/ ___/ __ `/ /_        
-     / /| |/ /_/ / /  / /_/ / __/        
-    /_/ |_|\__,_/_/   \__,_/_/         
 
-  Apache Karaf (4.2.0)
+### feature deployment
 
-Hit '<tab>' for a list of available commands
-and '[cmd] --help' for help on a specific command.
-Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
+#### add feature.xml
+```
+feature:repo-add mvn:com.example/osgi-ds-features/1.0-SNAPSHOT/xml
+ 
+feature:repo-list | grep osgi-ds
+```
 
-karaf@root()> list                                                                                                                                                                                                                    
-START LEVEL 100 , List Threshold: 50
-ID │ State  │ Lvl │ Version │ Name
-───┼────────┼─────┼─────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-21 │ Active │  80 │ 4.2.0   │ Apache Karaf :: OSGi Services :: Event
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> feature:install scr                                                                                                                                                                                                     
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> bundle:install -s mvn:com.example/osgi-ds-api
-Bundle ID: 46
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> bundle:install -s mvn:com.example/osgi-ds-core/1.0-SNAPSHOT 
-Bundle ID: 47
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> bundle:install -s mvn:com.example/osgi-ds-cli/1.0-SNAPSHOT
-Bundle ID: 48
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> osgi-ds:sample-command 
+#### osgi-ds-base
+```
+feature:install osgi-ds-base
+
+feature:list | grep osgi-ds
+```
+
+#### osgi-ds-cli
+```
+feature:install osgi-ds-cli
+
+feature:list | grep osgi-ds
+
+osgi-ds:echo -p engineer resul
+osgi-ds:echo -p engineer resul avan
+osgi-ds:echo -p engineer -a 35 resul avan
+```
+
+#### osgi-ds-rest
+```
+feature:install osgi-ds-rest
+
+feature:list | grep osgi-ds
+
+cxf:list-endpoints
+
+```
+
+#### osgi-ds-all
+```
+feature:install osgi-ds-all
+
+feature:list | grep osgi-ds
+
+```
+
+### REST test
+
+#### /osgi-ds/sample/hello
+```
+curl -i -X GET -H "Content-Type: application/json" http://localhost:8181/cxf/osgi-ds/sample/hello
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 16 Aug 2018 10:38:52 GMT
+Transfer-Encoding: chunked
+Server: Jetty(9.4.6.v20170531)
+
+Hello com.example.osgi.ds.rest.SampleResources
+```
+
+#### /osgi-ds/sample/name
+```
+curl -i -X GET -H "Content-Type: application/json" http://localhost:8181/cxf/osgi-ds/sample/name
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 16 Aug 2018 10:39:05 GMT
+Transfer-Encoding: chunked
+Server: Jetty(9.4.6.v20170531)
+
 com.example.osgi.ds.core.SampleManager
-karaf@root()>                                                                                                                                                                                                                         
-karaf@root()> list                                                                                                                                                                                                                    
-START LEVEL 100 , List Threshold: 50
-ID │ State  │ Lvl │ Version        │ Name
-───┼────────┼─────┼────────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-21 │ Active │  80 │ 4.2.0          │ Apache Karaf :: OSGi Services :: Event
-46 │ Active │  80 │ 1.0.0.SNAPSHOT │ osgi-ds-api
-47 │ Active │  80 │ 1.0.0.SNAPSHOT │ osgi-ds-core
-48 │ Active │  80 │ 1.0.0.SNAPSHOT │ osgi-ds-cli
-karaf@root()> scr:list                                                                                                                                                                                                                
- BundleId Component Name Default State
-    Component Id State      PIDs (Factory PID)
- [  44]   ServiceComponentRuntimeMBean  enabled
-    [   0] [active      ] 
- [  47]   com.example.osgi.ds.core.SampleManager  enabled
-    [   1] [active      ] 
-karaf@root()>          
 ```
 
+#### /osgi-ds/sample/config
+```
+curl -i -X GET -H "Content-Type: application/json" http://localhost:8181/cxf/osgi-ds/sample/config
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 16 Aug 2018 10:39:23 GMT
+Transfer-Encoding: chunked
+Server: Jetty(9.4.6.v20170531)
 
-
+{"name":"bar","maxSize":10,"number":0}
+```

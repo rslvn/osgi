@@ -34,7 +34,7 @@
         <requirement>osgi.service;effective:=active;filter:=(objectClass=org.osgi.service.http.HttpService)
         </requirement>
         <feature dependency="true">aries-blueprint</feature>
-        <feature version="${cxf.version}" dependency="true">cxf</feature>
+        <feature dependency="true">cxf</feature>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
@@ -47,6 +47,11 @@
     <feature name="osgi-felix-scr-cli" version="${project.version}">
         <feature version="${project.version}">osgi-felix-scr-base</feature>
         <bundle>mvn:com.example/osgi-felix-scr-cli/${project.version}</bundle>
+    </feature>
+
+    <feature name="osgi-felix-scr-all" version="${project.version}">
+        <feature version="${project.version}">osgi-felix-scr-rest</feature>
+        <feature version="${project.version}">osgi-felix-scr-cli</feature>
     </feature>
 
 </features>

@@ -2,63 +2,58 @@ package com.example.osgi.ds.rest;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Modified;
-import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
+
+import com.example.osgi.ds.api.SampleService;
+import com.example.osgi.ds.api.model.SampleConfig;
+import com.example.osgi.ds.rest.util.RestUtility;
 
 /**
  * Created by resulav on 13.08.2018.
  */
 
-import com.example.osgi.ds.api.SampleService;
-import com.example.osgi.ds.api.model.SampleConfig;
-
-@Component(immediate = true, enabled = true, service = SampleResources.class, property = {
-        "service.exported.interfaces=*", "service.exported.configs=org.apache.cxf.rs",
-        "org.apache.cxf.rs.address=/sample", "org.apache.cxf.rs.provider=com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"})
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path(SampleResources.SERVICE)
 public class SampleResources {
 
-    private final Logger logger = getLogger(getClass());
+	static final String SERVICE = "sample";
 
-    @Reference
-    private SampleService sampleService;
+	static final String LOG_FORMAT = "{} called";
 
-    @Activate
-    void activate() {
-        logger.info("{} activated", getClass().getTypeName());
-    }
+	private final Logger logger = getLogger(getClass());
 
-    @Deactivate
-    void deactivate() {
-        logger.info("{} deactivated", getClass().getTypeName());
-    }
+	/**
+	 * 
+	 */
+	public SampleResources() {
+		super();
+	}
 
-    @Modified
-    void modified() {
-        logger.info("{} modifed", getClass().getTypeName());
-    }
+	@GET
+	@Path("hello")
+	public String sayHello() {
+		logger.info(LOG_FORMAT, "sayHello");
+		return "Hello " + getClass().getTypeName();
+	}
 
-    @GET
-    @Path("hello")
-    public String sayHello() {
-        return "Hello " + getClass().getTypeName();
-    }
+	@GET
+	@Path("name")
+	public String sayName() {
+		logger.info(LOG_FORMAT, "sayHello");
+		return RestUtility.getService(SampleService.class).getName();
+	}
 
-    @GET
-    @Path("name")
-    public String sayName() {
-        return sampleService.getName();
-    }
-
-    @GET
-    @Path("config")
-    public SampleConfig getConfig() {
-        return sampleService.getConfig();
-    }
+	@GET
+	@Path("config")
+	public SampleConfig getConfig() {
+		logger.info(LOG_FORMAT, "getConfig");
+		return RestUtility.getService(SampleService.class).getConfig();
+	}
 }

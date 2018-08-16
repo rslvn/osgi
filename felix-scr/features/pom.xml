@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>osgi-felix-scr-features</artifactId>
-    <name>Apache Karaf :: Examples :: REST :: Features</name>
+    <name>osgi-felix-scr-features</name>
     <packaging>pom</packaging>
 
     <build>

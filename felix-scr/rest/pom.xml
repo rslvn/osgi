@@ -24,7 +24,7 @@
 
 
 	<artifactId>osgi-felix-scr-rest</artifactId>
-	<name>Apache Karaf :: Examples :: REST :: Provider</name>
+	<name>osgi-felix-scr-rest</name>
 	<packaging>bundle</packaging>
 
 	<dependencies>

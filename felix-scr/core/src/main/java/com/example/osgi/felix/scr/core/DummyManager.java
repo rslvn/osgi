@@ -1,10 +1,7 @@
 package com.example.osgi.felix.scr.core;
 
 import com.example.osgi.felix.scr.api.DummyService;
-import org.apache.felix.scr.annotations.Activate;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Deactivate;
-import org.apache.felix.scr.annotations.Modified;
+import org.apache.felix.scr.annotations.*;
 import org.slf4j.Logger;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -13,6 +10,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Created by resulav on 14.08.2018.
  */
 @Component(enabled = true, immediate = true)
+@Service
 public class DummyManager implements DummyService{
 
     private final Logger logger = getLogger(getClass());

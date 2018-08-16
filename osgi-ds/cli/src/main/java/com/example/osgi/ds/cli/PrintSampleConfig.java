@@ -16,7 +16,7 @@ import org.apache.karaf.shell.api.action.lifecycle.Service;
  *
  */
 @Slf4j
-@Command(scope = CommandUtility.SCOPE, name = SampleCommand.COMMAND, description = "Returns sample service config")
+@Command(scope = CommandUtility.SCOPE, name = PrintSampleConfig.COMMAND, description = "Returns sample service config")
 @Service
 public class PrintSampleConfig implements Action {
 

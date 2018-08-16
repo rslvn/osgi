@@ -20,7 +20,7 @@ public class SampleCommand implements Action {
 
 	private final Logger logger = getLogger(getClass());
 
-	static final String COMMAND = "print-sample-config";
+	static final String COMMAND = "sample-command";
 
 	@Reference
 	private SampleService service;

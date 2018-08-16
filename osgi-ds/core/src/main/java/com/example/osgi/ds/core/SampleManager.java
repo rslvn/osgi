@@ -87,14 +87,14 @@ public class SampleManager implements SampleService {
 	public String getEcho(String name, String surname, String profession, Integer age) {
 		StringBuilder sb = new StringBuilder(getClass().getTypeName()).append(" -> ");
 
-		sb.append("name: ").append(name).append(", ");
+		sb.append("name: ").append(name);
 		if (surname != null) {
-			sb.append("surname: ").append(surname).append(", ");
+			sb.append(", ").append("surname: ").append(surname);
 		}
-		sb.append("profession: ").append(profession).append(", ");
+		sb.append(", ").append("profession: ").append(profession);
 
 		if (age != null) {
-			sb.append("age: ").append(age).append(", ");
+			sb.append(", ").append("age: ").append(age);
 		}
 
 		return sb.toString();
